@@ -37,7 +37,7 @@ public class ArcView extends View {
     private int mTextColor = DEFAULT_TEXT_COLOR;
     private int mTextSize = DEFAULT_TEXT_SIZE;
 
-    private int progress = 50;
+    private int progress = 0;
     private int mMaxProgress = DEFAULT_MAX_PROGRESS;
 
     private Paint mCirclePaint;
@@ -134,10 +134,10 @@ public class ArcView extends View {
         int sweepArc = MAX_SWEEP_ANGLE * progress / mMaxProgress;
         canvas.drawArc(left, top, right, bottom, START_SWEEP_ANGLE, sweepArc, false, mCirclePaint);
 
-
-        mTextPaint.getTextBounds(String.valueOf(progress), 0, String.valueOf(progress).length(),
+        String text = String.valueOf(progress) + "%";
+        mTextPaint.getTextBounds(text, 0, text.length(),
                 mTextBound);
-        canvas.drawText(String.valueOf(progress), (left + right) / 2 - mTextBound.width() / 2,
+        canvas.drawText(text, (left + right) / 2 - mTextBound.width() / 2,
                 (top + bottom) / 2 + mTextBound.height() / 2, mTextPaint);
     }
 

@@ -9,6 +9,8 @@
     tools:context="cn.onlyloveyd.customview.activity.CustomArcProgressBarActivity">
 
     <SeekBar
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
         android:id="@+id/sb_indicator"
         android:layout_width="match_parent"
 
