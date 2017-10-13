@@ -155,15 +155,13 @@ public class CustomTriangleIndicator extends LinearLayout {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        Paint p = new Paint();
-        p.setColor(Color.BLACK);
-        //实例化路径
+
         Path path = new Path();
         float currentStartPosition = mTriangleStartPosition + mTabOffset;
-        path.moveTo(currentStartPosition , getHeight());// 此点为多边形的起点
+        path.moveTo(currentStartPosition , getHeight());
         path.lineTo(currentStartPosition + mTriangleWidth/2, getHeight()-mTriangleHeight);
         path.lineTo(currentStartPosition + mTriangleWidth, getHeight());
-        path.close(); // 使这些点构成封闭的多边形
-        canvas.drawPath(path, p);
+        path.close();
+        canvas.drawPath(path, mTrianglePaint);
     }
 }

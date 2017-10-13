@@ -35,7 +35,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.TextViewHo
         intent.setClass(mContext , CustomArcProgressBarActivity.class);
         demoList.add(intent);
 
-        mTitles.add("自定义ViewPager圆点指示器");
+        mTitles.add("自定义ViewPager指示器");
         Intent intent2 = new Intent();
         intent2.setClass(mContext , IndicatorActivity.class);
         demoList.add(intent2);
