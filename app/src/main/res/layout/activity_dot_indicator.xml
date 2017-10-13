@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context="cn.onlyloveyd.customview.activity.IndicatorActivity">
+
+    <cn.onlyloveyd.customview.view.CustomDotIndicator
+        android:background="@android:color/holo_orange_light"
+        android:id="@+id/customDotIndicator"
+        app:dotColor="@android:color/white"
+        app:dotRadius="4dp"
+        app:dotFillOrStroke="1"
+        app:dotStrokeWidth="1dp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"/>
+
+    <cn.onlyloveyd.customview.view.CustomRectangleIndicator
+        android:id="@+id/customRectIndicator"
+        android:background="@android:color/holo_purple"
+        app:rectColor="@android:color/white"
+        app:rectHeight="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"/>
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"/>
+
+</LinearLayout>

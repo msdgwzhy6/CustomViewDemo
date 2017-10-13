@@ -11,6 +11,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import cn.onlyloveyd.customview.activity.CustomArcProgressBarActivity;
+import cn.onlyloveyd.customview.activity.IndicatorActivity;
 
 /**
  * 文 件 名: CustomAdapter
@@ -33,6 +34,12 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.TextViewHo
         Intent intent = new Intent();
         intent.setClass(mContext , CustomArcProgressBarActivity.class);
         demoList.add(intent);
+
+        mTitles.add("自定义ViewPager圆点指示器");
+        Intent intent2 = new Intent();
+        intent2.setClass(mContext , IndicatorActivity.class);
+        demoList.add(intent2);
+
     }
 
     @Override
@@ -47,12 +54,12 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.TextViewHo
     }
 
     @Override
-    public void onBindViewHolder(TextViewHolder holder, int position) {
+    public void onBindViewHolder(TextViewHolder holder, final int position) {
         ((TextView)holder.itemView).setText(mTitles.get(position));
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mContext.startActivity(demoList.get(0));
+                mContext.startActivity(demoList.get(position));
             }
         });
     }

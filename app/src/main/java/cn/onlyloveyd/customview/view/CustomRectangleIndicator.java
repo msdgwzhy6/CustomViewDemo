@@ -16,28 +16,25 @@ import android.widget.TextView;
 import cn.onlyloveyd.customview.R;
 
 /**
- * 文 件 名: CustomDotIndicator
+ * 文 件 名: CustomRectangleIndicator
  * 创 建 人: 易冬
- * 创建日期: 2017/10/12 16:35
+ * 创建日期: 2017/10/13 09:43
  * 邮   箱: onlyloveyd@gmail.com
  * 博   客: https://onlyloveyd.cn
  * 描   述：
  */
-public class CustomDotIndicator extends LinearLayout {
+public class CustomRectangleIndicator extends LinearLayout{
     //自定义属性默认值
-    private final int DEFAULT_DOT_RADIUS = 10;
-    private final int DEFAULT_DOT_COLOR = Color.GREEN;
-    private final int DEFAULT_DOT_FILLORSTROKE = 1;//0 空心 1 实心
-    private final int DEFAULT_DOT_STROKE_WIDTH = 2;//如果是空心，需要画笔宽度
+    private final int DEFAULT_RECT_COLOR = Color.GREEN;
+    private final int DEFAULT_RECT_HEIGHT = 4;
 
     //自定义属性
-    private int mDotRadius = DEFAULT_DOT_RADIUS;
-    private int mDotColor = DEFAULT_DOT_COLOR;
-    private int mDotFillOrStroke = DEFAULT_DOT_FILLORSTROKE;
-    private int mDotStrokeWidth = DEFAULT_DOT_STROKE_WIDTH;
+    private int mRectColor = DEFAULT_RECT_COLOR;
+    private int mRectHeight = DEFAULT_RECT_HEIGHT;
+
 
     //指示器画笔
-    private Paint mDotPaint;
+    private Paint mRectPaint;
 
     private ViewPager mViewPager;
     private int mTabCount = -1;
@@ -50,8 +47,8 @@ public class CustomDotIndicator extends LinearLayout {
 
     //当前ViewPage index
     private int currentIndex = 0;
-    //点指示器的中心点X坐标
-    private float mDotStartPosition;
+    //矩形指示器的起点X坐标
+    private float mRectStartPosition;
 
     public ViewPager getViewPager() {
         return mViewPager;
@@ -107,29 +104,25 @@ public class CustomDotIndicator extends LinearLayout {
         }
     }
 
-    public CustomDotIndicator(Context context) {
+    public CustomRectangleIndicator(Context context) {
         super(context);
     }
 
-    public CustomDotIndicator(Context context,
+    public CustomRectangleIndicator(Context context,
             @Nullable AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public CustomDotIndicator(Context context,
+    public CustomRectangleIndicator(Context context,
             @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
         final TypedArray attributes = getContext().obtainStyledAttributes(attrs,
-                R.styleable.CustomDotIndicator);
+                R.styleable.CustomRectangleIndicator);
 
-        mDotColor = attributes.getColor(R.styleable.CustomDotIndicator_dotColor, DEFAULT_DOT_COLOR);
-        mDotRadius = (int) attributes.getDimension(R.styleable.CustomDotIndicator_dotRadius,
-                DEFAULT_DOT_RADIUS);
-        mDotFillOrStroke = attributes.getInt(R.styleable.CustomDotIndicator_dotFillOrStroke,
-                DEFAULT_DOT_FILLORSTROKE);
-        mDotStrokeWidth = (int) attributes.getDimension(
-                R.styleable.CustomDotIndicator_dotStrokeWidth, DEFAULT_DOT_STROKE_WIDTH);
+        mRectColor = attributes.getColor(R.styleable.CustomRectangleIndicator_rectColor, DEFAULT_RECT_COLOR);
+        mRectHeight = (int) attributes.getDimension(R.styleable.CustomRectangleIndicator_rectHeight,
+                DEFAULT_RECT_HEIGHT);
         attributes.recycle();
         init();
     }
@@ -138,7 +131,7 @@ public class CustomDotIndicator extends LinearLayout {
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
         mTabWidth = w * 1.0f / getChildCount();
-        mDotStartPosition = currentIndex * mTabWidth + mTabWidth / 2;
+        mRectStartPosition = currentIndex * mTabWidth;
     }
 
     @Override
@@ -147,19 +140,16 @@ public class CustomDotIndicator extends LinearLayout {
     }
 
     private void init() {
-        mDotPaint = new Paint();
-        mDotPaint.setAntiAlias(true);
-        mDotPaint.setColor(mDotColor);
-        mDotPaint.setStrokeWidth(mDotStrokeWidth);
-        mDotPaint.setStrokeCap(Paint.Cap.ROUND);
-        mDotPaint.setStyle(mDotFillOrStroke == 0 ? Paint.Style.STROKE : Paint.Style.FILL);
+        mRectPaint = new Paint();
+        mRectPaint.setAntiAlias(true);
+        mRectPaint.setColor(mRectColor);
+        mRectPaint.setStrokeCap(Paint.Cap.ROUND);
+        mRectPaint.setStyle(Paint.Style.FILL);
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        // System.err.println("yidong -- onDraw");
-        canvas.drawCircle(mDotStartPosition + mTabOffset, getHeight() - mDotRadius, mDotRadius,
-                mDotPaint);
+        canvas.drawRect(mRectStartPosition + mTabOffset, getHeight() - mRectHeight , mRectStartPosition + mTabOffset + mTabWidth , getHeight(), mRectPaint);
     }
 }

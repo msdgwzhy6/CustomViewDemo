@@ -22,4 +22,9 @@
         <attr name="dotStrokeWidth" format="dimension"/>
     </declare-styleable>
 
+    <declare-styleable name="CustomRectangleIndicator">
+        <attr name="rectColor" format="color"/>
+        <attr name="rectHeight" format="dimension"/>
+    </declare-styleable>
+
 </resources>
