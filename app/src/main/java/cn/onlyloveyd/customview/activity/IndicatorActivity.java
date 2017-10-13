@@ -13,6 +13,7 @@ import cn.onlyloveyd.customview.R;
 import cn.onlyloveyd.customview.adapter.CustomViewPagerAdapter;
 import cn.onlyloveyd.customview.view.CustomDotIndicator;
 import cn.onlyloveyd.customview.view.CustomRectangleIndicator;
+import cn.onlyloveyd.customview.view.CustomTriangleIndicator;
 
 public class IndicatorActivity extends AppCompatActivity {
 
@@ -22,6 +23,8 @@ public class IndicatorActivity extends AppCompatActivity {
     ViewPager mVp;
     @BindView(R.id.customRectIndicator)
     CustomRectangleIndicator mCustomRectIndicator;
+    @BindView(R.id.customTriangleIndicator)
+    CustomTriangleIndicator mCustomTriangleIndicator;
 
     private List<String> mTitles = new ArrayList<>();
 
@@ -41,5 +44,6 @@ public class IndicatorActivity extends AppCompatActivity {
         mVp.setAdapter(customViewPagerAdapter);
         mCustomDotIndicator.setViewPager(mVp);
         mCustomRectIndicator.setViewPager(mVp);
+        mCustomTriangleIndicator.setViewPager(mVp);
     }
 }

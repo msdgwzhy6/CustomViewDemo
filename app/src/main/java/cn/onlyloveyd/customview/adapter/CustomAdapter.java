@@ -54,12 +54,13 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.TextViewHo
     }
 
     @Override
-    public void onBindViewHolder(TextViewHolder holder, final int position) {
+    public void onBindViewHolder(TextViewHolder holder, int position) {
+        final int finalPosition = position;
         ((TextView)holder.itemView).setText(mTitles.get(position));
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mContext.startActivity(demoList.get(position));
+                mContext.startActivity(demoList.get(finalPosition));
             }
         });
     }
