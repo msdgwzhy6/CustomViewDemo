@@ -38,9 +38,9 @@ public class CustomTriangleIndicator extends LinearLayout {
 
     //指示器画笔
     private Paint mTrianglePaint;
+    private Path mTriangePath;
 
     private ViewPager mViewPager;
-    private int mTabCount = -1;
     private final LinearLayout.LayoutParams defaultLayoutParams = new LinearLayout.LayoutParams(0,
             LayoutParams.MATCH_PARENT, 1.0f);
 
@@ -48,14 +48,8 @@ public class CustomTriangleIndicator extends LinearLayout {
     private float mTabWidth;
     private float mTabOffset;
 
-    //当前ViewPage index
-    private int currentIndex = 0;
     //矩形指示器的起点X坐标
     private float mTriangleStartPosition;
-
-    public ViewPager getViewPager() {
-        return mViewPager;
-    }
 
     public void setViewPager(ViewPager viewPager) {
         mViewPager = viewPager;
@@ -73,7 +67,6 @@ public class CustomTriangleIndicator extends LinearLayout {
 
             @Override
             public void onPageSelected(int position) {
-                currentIndex = position;
             }
 
             @Override
@@ -101,8 +94,8 @@ public class CustomTriangleIndicator extends LinearLayout {
 
     private void notifyViewPagerChanged() {
         this.removeAllViews();
-        mTabCount = mViewPager.getAdapter().getCount();
-        for (int i = 0; i < mTabCount; i++) {
+        int tabCount = mViewPager.getAdapter().getCount();
+        for (int i = 0; i < tabCount; i++) {
             addTextTab(i, mViewPager.getAdapter().getPageTitle(i).toString());
         }
     }
@@ -135,12 +128,7 @@ public class CustomTriangleIndicator extends LinearLayout {
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
         mTabWidth = w * 1.0f / getChildCount();
-        mTriangleStartPosition = currentIndex * mTabWidth + (mTabWidth - mTriangleWidth) /2;
-    }
-
-    @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        mTriangleStartPosition = (mTabWidth - mTriangleWidth) /2;
     }
 
     private void init() {
@@ -149,19 +137,20 @@ public class CustomTriangleIndicator extends LinearLayout {
         mTrianglePaint.setColor(mTriangleColor);
         mTrianglePaint.setStrokeCap(Paint.Cap.ROUND);
         mTrianglePaint.setStyle(Paint.Style.FILL);
+
+        mTriangePath = new Path();
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-
-        Path path = new Path();
+        mTriangePath.reset();
         float currentStartPosition = mTriangleStartPosition + mTabOffset;
-        path.moveTo(currentStartPosition , getHeight());
-        path.lineTo(currentStartPosition + mTriangleWidth/2, getHeight()-mTriangleHeight);
-        path.lineTo(currentStartPosition + mTriangleWidth, getHeight());
-        path.close();
-        canvas.drawPath(path, mTrianglePaint);
+        mTriangePath.moveTo(currentStartPosition , getHeight());
+        mTriangePath.lineTo(currentStartPosition + mTriangleWidth/2, getHeight()-mTriangleHeight);
+        mTriangePath.lineTo(currentStartPosition + mTriangleWidth, getHeight());
+        mTriangePath.close();
+        canvas.drawPath(mTriangePath, mTrianglePaint);
     }
 }

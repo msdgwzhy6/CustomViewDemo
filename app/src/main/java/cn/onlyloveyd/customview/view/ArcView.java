@@ -44,7 +44,7 @@ public class ArcView extends View {
     private Paint mBgPaint;
     private Paint mTextPaint;
 
-    private Rect mTextBound = new Rect();
+    private final Rect mTextBound = new Rect();
 
     public ArcView(Context context) {
         this(context, null);
@@ -81,16 +81,6 @@ public class ArcView extends View {
                         DEFAULT_TEXT_SIZE);
         attributes.recycle();
         init();
-    }
-
-    @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-    }
-
-    @Override
-    protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
-        super.onLayout(changed, left, top, right, bottom);
     }
 
     private void init() {
@@ -130,9 +120,9 @@ public class ArcView extends View {
         int paddingBottom = getPaddingBottom();
 
         int circleWidth = getWidth() - paddingLeft - paddingRight;
-        int circlrHeight = getHeight() - paddingTop - paddingBottom;
+        int circleHeight = getHeight() - paddingTop - paddingBottom;
 
-        int radius = Math.min(circleWidth, circlrHeight) / 2;
+        int radius = Math.min(circleWidth, circleHeight) / 2;
 
         int left = getLeft() + paddingLeft;
         int right = left + radius * 2;

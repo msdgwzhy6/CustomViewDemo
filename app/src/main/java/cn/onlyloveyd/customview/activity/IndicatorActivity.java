@@ -3,6 +3,7 @@ package cn.onlyloveyd.customview.activity;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.transition.Slide;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,13 +27,19 @@ public class IndicatorActivity extends AppCompatActivity {
     @BindView(R.id.customTriangleIndicator)
     CustomTriangleIndicator mCustomTriangleIndicator;
 
-    private List<String> mTitles = new ArrayList<>();
+    private final List<String> mTitles = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dot_indicator);
         ButterKnife.bind(this);
+
+        Slide slide = new Slide();
+        slide.setDuration(200);
+        getWindow().setEnterTransition(slide);
+
+
 
         mTitles.add("体育");
         mTitles.add("军事");

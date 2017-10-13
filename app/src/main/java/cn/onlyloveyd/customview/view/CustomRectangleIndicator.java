@@ -37,7 +37,6 @@ public class CustomRectangleIndicator extends LinearLayout{
     private Paint mRectPaint;
 
     private ViewPager mViewPager;
-    private int mTabCount = -1;
     private final LinearLayout.LayoutParams defaultLayoutParams = new LinearLayout.LayoutParams(0,
             LayoutParams.MATCH_PARENT, 1.0f);
 
@@ -45,14 +44,8 @@ public class CustomRectangleIndicator extends LinearLayout{
     private float mTabWidth;
     private float mTabOffset;
 
-    //当前ViewPage index
-    private int currentIndex = 0;
     //矩形指示器的起点X坐标
     private float mRectStartPosition;
-
-    public ViewPager getViewPager() {
-        return mViewPager;
-    }
 
     public void setViewPager(ViewPager viewPager) {
         mViewPager = viewPager;
@@ -70,7 +63,6 @@ public class CustomRectangleIndicator extends LinearLayout{
 
             @Override
             public void onPageSelected(int position) {
-                currentIndex = position;
             }
 
             @Override
@@ -98,8 +90,8 @@ public class CustomRectangleIndicator extends LinearLayout{
 
     private void notifyViewPagerChanged() {
         this.removeAllViews();
-        mTabCount = mViewPager.getAdapter().getCount();
-        for (int i = 0; i < mTabCount; i++) {
+        int tabCount = mViewPager.getAdapter().getCount();
+        for (int i = 0; i < tabCount; i++) {
             addTextTab(i, mViewPager.getAdapter().getPageTitle(i).toString());
         }
     }
@@ -131,12 +123,7 @@ public class CustomRectangleIndicator extends LinearLayout{
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
         mTabWidth = w * 1.0f / getChildCount();
-        mRectStartPosition = currentIndex * mTabWidth;
-    }
-
-    @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        mRectStartPosition = 0;
     }
 
     private void init() {

@@ -4,7 +4,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import cn.onlyloveyd.customview.fragment.DotIndicatorFragment;
@@ -18,7 +17,7 @@ import cn.onlyloveyd.customview.fragment.DotIndicatorFragment;
  * 描   述：
  */
 public class CustomViewPagerAdapter extends FragmentPagerAdapter {
-    List<String> mTitles;
+    final List<String> mTitles;
 
     public CustomViewPagerAdapter(FragmentManager fm, List titles) {
         super(fm);

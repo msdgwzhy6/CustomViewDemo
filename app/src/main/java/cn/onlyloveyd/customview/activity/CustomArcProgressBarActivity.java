@@ -2,6 +2,7 @@ package cn.onlyloveyd.customview.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.transition.Explode;
 import android.widget.SeekBar;
 
 import butterknife.BindView;
@@ -20,6 +21,10 @@ public class CustomArcProgressBarActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+
+        Explode explode = new Explode();
+        explode.setDuration(200);
+        getWindow().setEnterTransition(explode);
 
         mSbIndicator.setMax(100);
         mArcView.setMaxProgress(mSbIndicator.getMax());

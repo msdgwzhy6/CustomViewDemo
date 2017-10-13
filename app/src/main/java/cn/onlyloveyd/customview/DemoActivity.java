@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.transition.Slide;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -22,6 +23,10 @@ public class DemoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_demo);
         ButterKnife.bind(this);
+
+        Slide slide = new Slide();
+        slide.setDuration(200);
+        getWindow().setExitTransition(slide);
 
         mCustomAdapter = new CustomAdapter(this);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);

@@ -1,5 +1,6 @@
 package cn.onlyloveyd.customview.adapter;
 
+import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import cn.onlyloveyd.customview.DemoActivity;
 import cn.onlyloveyd.customview.activity.CustomArcProgressBarActivity;
 import cn.onlyloveyd.customview.activity.IndicatorActivity;
 
@@ -23,9 +25,9 @@ import cn.onlyloveyd.customview.activity.IndicatorActivity;
  */
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.TextViewHolder> {
 
-    private Context mContext;
-    private ArrayList<Intent> demoList = new ArrayList<>();
-    private ArrayList<String> mTitles =  new ArrayList<>();
+    private final Context mContext;
+    private final ArrayList<Intent> demoList = new ArrayList<>();
+    private final ArrayList<String> mTitles =  new ArrayList<>();
 
     public CustomAdapter(Context context) {
         mContext = context;
@@ -60,7 +62,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.TextViewHo
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mContext.startActivity(demoList.get(finalPosition));
+                mContext.startActivity(demoList.get(finalPosition), ActivityOptions.makeSceneTransitionAnimation((DemoActivity)mContext).toBundle());
             }
         });
     }

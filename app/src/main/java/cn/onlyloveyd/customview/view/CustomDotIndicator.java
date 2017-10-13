@@ -39,23 +39,18 @@ public class CustomDotIndicator extends LinearLayout {
     //指示器画笔
     private Paint mDotPaint;
 
+
+    //ViewPager相关
     private ViewPager mViewPager;
-    private int mTabCount = -1;
     private final LinearLayout.LayoutParams defaultLayoutParams = new LinearLayout.LayoutParams(0,
             LayoutParams.MATCH_PARENT, 1.0f);
 
-
+    //Tab宽度和移动偏移，因为绘制位置 = 起点位置（固定） + Offset(随着ViewPager的滚动变化)
     private float mTabWidth;
     private float mTabOffset;
 
-    //当前ViewPage index
-    private int currentIndex = 0;
     //点指示器的中心点X坐标
     private float mDotStartPosition;
-
-    public ViewPager getViewPager() {
-        return mViewPager;
-    }
 
     public void setViewPager(ViewPager viewPager) {
         mViewPager = viewPager;
@@ -73,7 +68,6 @@ public class CustomDotIndicator extends LinearLayout {
 
             @Override
             public void onPageSelected(int position) {
-                currentIndex = position;
             }
 
             @Override
@@ -101,8 +95,8 @@ public class CustomDotIndicator extends LinearLayout {
 
     private void notifyViewPagerChanged() {
         this.removeAllViews();
-        mTabCount = mViewPager.getAdapter().getCount();
-        for (int i = 0; i < mTabCount; i++) {
+        int tabCount = mViewPager.getAdapter().getCount();
+        for (int i = 0; i < tabCount; i++) {
             addTextTab(i, mViewPager.getAdapter().getPageTitle(i).toString());
         }
     }
@@ -138,12 +132,7 @@ public class CustomDotIndicator extends LinearLayout {
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
         mTabWidth = w * 1.0f / getChildCount();
-        mDotStartPosition = currentIndex * mTabWidth + mTabWidth / 2;
-    }
-
-    @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        mDotStartPosition = mTabWidth / 2;
     }
 
     private void init() {
@@ -158,7 +147,6 @@ public class CustomDotIndicator extends LinearLayout {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        // System.err.println("yidong -- onDraw");
         canvas.drawCircle(mDotStartPosition + mTabOffset, getHeight() - mDotRadius, mDotRadius,
                 mDotPaint);
     }
