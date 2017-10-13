@@ -14,7 +14,7 @@ import android.view.View;
 import cn.onlyloveyd.customview.R;
 
 /**
- * 文 件 名: CircleView
+ * 文 件 名: ArcView
  * 创 建 人: 易冬
  * 创建日期: 2017/10/10 16:48
  * 邮   箱: onlyloveyd@gmail.com
